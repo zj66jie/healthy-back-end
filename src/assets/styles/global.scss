@@ -1,0 +1,65 @@
+@import "./reset";
+@import "./mixin";
+@import "./home";
+.icon {
+  color: #333;
+  font-size: px2rem(20);
+}
+.icon1 {
+  color: #666;
+  font-size: px2rem(20);
+}
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// slideTitle-down动画
+// v-enter,v-leave-to代表开始以及结束时的状态
+.slideTitle-down-enter,
+.slideTitle-down-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+// enter-to代表enter进入后状态
+// leave代表leave-to前状态
+.slideTitle-down-enter-to,
+.slideTitle-down-leave {
+  transform: translate3d(0, 0, 0);
+}
+// v-enter-active,v-leave-active代表动画的过程。
+.slideTitle-down-enter-active,
+.slideTitle-down-leave-active {
+  transition: all 0.15s linear;
+}
+// slideMenu-up动画
+.slideMenu-up-enter,
+.slideMenu-up-leave-to,
+.popup-list-enter,
+.popup-list-leave-to {
+  transform: translate3d(0, 100%, 0);
+}
+.slideMenu-up-enter-to,
+.slideMenu-up-leave,
+.popup-list-enter-to,
+.popup-list-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slideMenu-up-enter-active,
+.slideMenu-up-leave-active,
+.popup-list-enter-active,
+.popup-list-leave-active {
+  transition: all 0.15s linear;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+}
+.slide-right-enter,
+.slide-right-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
