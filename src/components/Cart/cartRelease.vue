@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1>规划局搜房聚划算</h1>
+    商品发布
   </div>
 </template>
 

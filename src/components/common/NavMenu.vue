@@ -18,35 +18,67 @@
             </template>
             <el-menu-item-group>
               <!-- <template slot="title">分组一</template> -->
-              <el-menu-item index="/home/about" @click="navTo"
-                >水费</el-menu-item
+              <el-menu-item
+                index="/home/services/pay-report"
+                @click="navTo(`/home/services/pay-report`)"
+                >缴费上报</el-menu-item
               >
-              <el-menu-item index="1-2">电费</el-menu-item>
-              <el-menu-item index="1-3">投诉</el-menu-item>
-              <el-menu-item index="1-3">报修</el-menu-item>
+              <el-menu-item
+                index="/home/services/pay-info"
+                @click="navTo(`/home/services/pay-info`)"
+                >缴费情况</el-menu-item
+              >
+              <el-menu-item
+                index="/home/services/complaint"
+                @click="navTo(`/home/services/complaint`)"
+                >投诉处理</el-menu-item
+              >
+              <el-menu-item
+                index="/home/services/repair"
+                @click="navTo(`/home/services/repair`)"
+                >报修处理</el-menu-item
+              >
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="2">
+          <el-menu-item
+            index="/home/temperature-report"
+            @click="navTo(`/home/temperature-report`)"
+          >
             <i class="el-icon-thumb"></i>
             <span slot="title">温度上报</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item
+            index="/home/news-info"
+            @click="navTo(`/home/news-info`)"
+          >
             <i class="el-icon-document"></i>
             <span slot="title">新闻情况</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item
+            index="/home/community-ques"
+            @click="navTo(`/home/community-ques`)"
+          >
             <i class="el-icon-edit-outline"></i>
             <span slot="title">社区问卷</span>
           </el-menu-item>
-          <el-menu-item index="5">
+          <el-menu-item
+            index="/home/prevention-info"
+            @click="navTo(`/home/prevention-info`)"
+          >
             <i class="el-icon-collection"></i>
             <span slot="title">防疫知识</span>
           </el-menu-item>
-          <el-menu-item index="6">
+          <el-menu-item
+            index="/home/people-info"
+            @click="navTo(`/home/people-info`)"
+          >
             <i class="el-icon-s-custom"></i>
             <span slot="title">人员信息</span>
           </el-menu-item>
-          <el-menu-item index="7">
+          <el-menu-item
+            index="/home/apply-info"
+            @click="navTo(`/home/apply-info`)"
+          >
             <i class="el-icon-edit"></i>
             <span slot="title"
               >出入申请<el-badge
@@ -63,8 +95,16 @@
             </template>
             <el-menu-item-group>
               <!-- <template slot="title">分组一</template> -->
-              <el-menu-item index="" @click="navTo">商品发布</el-menu-item>
-              <el-menu-item index="6-2">订单管理</el-menu-item>
+              <el-menu-item
+                index="/home/cart/cart-release"
+                @click="navTo(`/home/cart/cart-release`)"
+                >商品发布</el-menu-item
+              >
+              <el-menu-item
+                index="/home/cart/cart-order"
+                @click="navTo(`/home/cart/cart-order`)"
+                >订单管理</el-menu-item
+              >
               <el-menu-item index="6-3">选项3</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
@@ -95,16 +135,50 @@ export default {
   methods: {
     getPath() {
       this.defaultUrl = this.$route.path;
+      console.log(this.defaultUrl);
       switch (this.defaultUrl) {
         case "/home":
           this.$store.commit("SET_contentTitle", []);
           break;
-        case "/home/about":
-          this.$store.commit("SET_contentTitle", ["小区服务", "水费"]);
+        case "/home/services/pay-report":
+          this.$store.commit("SET_contentTitle", ["小区服务", "缴费上报"]);
           break;
-
+        case "/home/services/pay-info":
+          this.$store.commit("SET_contentTitle", ["小区服务", "缴费情况"]);
+          break;
+        case "/home/services/repair":
+          this.$store.commit("SET_contentTitle", ["小区服务", "报修处理"]);
+          break;
+        case "/home/services/complaint":
+          this.$store.commit("SET_contentTitle", ["小区服务", "投诉处理"]);
+          break;
+        case "/home/temperature-report":
+          this.$store.commit("SET_contentTitle", ["温度上报"]);
+          break;
+        case "/home/news-info":
+          this.$store.commit("SET_contentTitle", ["新闻情况"]);
+          break;
+        case "/home/community-ques":
+          this.$store.commit("SET_contentTitle", ["社区问卷"]);
+          break;
+        case "/home/prevention-info":
+          this.$store.commit("SET_contentTitle", ["防疫知识"]);
+          break;
+        case "/home/people-info":
+          this.$store.commit("SET_contentTitle", ["人员信息"]);
+          break;
+        case "/home/apply-info":
+          this.$store.commit("SET_contentTitle", ["出入申请"]);
+          break;
+        case "/home/cart/cart-release":
+          this.$store.commit("SET_contentTitle", ["社区购物", "商品发布"]);
+          break;
+        case "/home/cart/cart-order":
+          this.$store.commit("SET_contentTitle", ["社区购物", "订单管理"]);
+          break;
         default:
           break;
+          0;
       }
       console.log(this.defaultUrl);
     },
@@ -114,12 +188,12 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    navTo() {
-      console.log("44");
+    navTo(routerUrl) {
+      console.log(routerUrl);
       // this.$store.commit("SET_contentTitle", ["导航一", "选项一"]);
       // this.$emit("childFn", ["导航一", "选项一"]);
       this.$router.push({
-        path: "/home/about",
+        path: routerUrl,
         query: {
           // // category: getCategoryName(this.data.category),
           // categoryText: '畅销精选'

@@ -20,7 +20,6 @@ import NavMenu from "@/components/common/NavMenu.vue";
 import NavTitle from "@/components/common/NavTitle.vue";
 import ContentTitle from "@/components/common/ContentTitle.vue";
 export default {
-  name: "vueName",
   data() {
     return {
       contentTitle: [],
@@ -71,11 +70,14 @@ export default {
   .nav-right-content {
     margin-top: 5px;
     width: 100%;
+    overflow: auto;
+    // overflow-y: hidden;
     background-color: #f0f1f4;
     // background-color: rgb(204, 152, 152);
   }
   // .nav-right-page {
   //   // background: #000;
+  //   // height: 100%;
   // }
 }
 </style>
