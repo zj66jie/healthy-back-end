@@ -1,5 +1,10 @@
 <template>
   <div class="pay-report">
+    <div class="pay-report-start">
+      <el-button type="warning" style="width:15%;font-size:18px"
+        >开始本月上报</el-button
+      >
+    </div>
     <div class="pay-report-header">
       <el-radio-group v-model="radio1">
         <el-radio-button label="未上报"></el-radio-button>
@@ -7,7 +12,7 @@
       </el-radio-group>
     </div>
     <div class="pay-report-table" v-if="radio1 == '未上报'">
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="UpShowTableData" style="width: 100%">
         <!-- <el-table-column prop="time" label="日期" min-width="180">
         </el-table-column> -->
         <el-table-column prop="name" label="姓名" min-width="180">
@@ -17,7 +22,7 @@
         <el-table-column prop="water" label="水费" min-width="180">
         </el-table-column>
         <el-table-column label="电费" min-width="180">
-          请上报
+          <span style="color:red;">请上报</span>
         </el-table-column>
         <el-table-column label="操作" fixed="right" min-width="180">
           <template slot-scope="scope">
@@ -35,8 +40,8 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[10, 15, 20]"
-          :page-size="10"
+          :page-sizes="[8, 10, 15]"
+          :page-size="upPageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="upTotal"
         >
@@ -161,9 +166,11 @@ export default {
     return {
       radio1: "未上报",
       upTotal: 0,
+      upPageSize: 8,
       overTotal: 20,
       currentPage: 1,
       tableData: [],
+      UpShowTableData: [],
       dialogFormVisible: false,
       formLabelWidth: "100px",
       numberValidateForm: {
@@ -182,6 +189,7 @@ export default {
         // console.log("res");
         this.tableData = res.data.data;
         this.totalNum();
+        this.dataShow(this.upPageSize);
       })
       .catch((err) => {
         console.log(err);
@@ -192,13 +200,29 @@ export default {
     totalNum() {
       this.upTotal = this.tableData.length;
     },
-    handleSizeChange() {},
-    handleCurrentChange() {},
+    dataShow(num) {
+      this.UpShowTableData = this.tableData.slice(0, num);
+      this.upPageSize = num;
+    },
+    // up每页数量
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.dataShow(val);
+    },
+    // up每页数据，第几页
+    handleCurrentChange(val) {
+      console.log(`当前页 ${val} 条`);
+      //设置开始
+      let start = this.upPageSize * val - this.upPageSize;
+      // 设置结束长度
+      let end = this.upPageSize * val; //长度判断
+      console.log(end);
+      end = end > this.tableData.length ? this.tableData.length : end;
+      this.UpShowTableData = this.tableData.slice(start, end);
+    },
+    // up上报按钮
     handleEdit(index, row) {
       this.dialogFormVisible = true;
-      // setTimeout(() => {
-      //   this.resetForm();
-      // }, 1000);
       console.log(index, row);
     },
     // 提交
@@ -233,6 +257,13 @@ export default {
   width: 100%;
   // height: 100%;
   padding: 20px;
+  .pay-report-start {
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    @include center;
+  }
   .pay-report-header {
     // height: 50px;
     // border: 1px solid #ccc;
