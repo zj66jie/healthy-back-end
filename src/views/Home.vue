@@ -2,10 +2,12 @@
   <div id="home">
     <header><nav-title></nav-title></header>
     <div class="nav">
-      <div class="nav-left-menu"><nav-menu @childFn="parentFn"></nav-menu></div>
+      <div class="nav-left-menu">
+        <NavMenu></NavMenu>
+      </div>
       <div class="nav-right-content">
         <div class="nav-right-header">
-          <ContentTitle :contentTitle="contentTitle"></ContentTitle>
+          <ContentTitle></ContentTitle>
         </div>
         <div class="nav-right-page">
           <router-view />
@@ -30,29 +32,17 @@ export default {
     NavTitle,
     ContentTitle,
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     // if (to.meta.key > from.meta.key) {
     //   this.transitionName = "slide-left";
     // } else {
     //   this.transitionName = "slide-right";
     // }
-    console.log(from);
+    console.log("home.vue触发"); //可以触发
     // this.transitionName = "slide-right";
     next();
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    parentFn(payload) {
-      this.contentTitle = payload;
-      console.log(payload);
-      console.log(this.contentTitle);
-    },
-  },
+  methods: {},
 };
 </script>
 <style lang="scss">

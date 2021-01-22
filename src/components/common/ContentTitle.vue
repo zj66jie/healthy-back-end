@@ -19,12 +19,6 @@ export default {
   data() {
     return {};
   },
-  props: {
-    contentTitle: {
-      type: Array,
-      default: ["red"],
-    },
-  },
 };
 </script>
 

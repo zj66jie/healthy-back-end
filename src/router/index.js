@@ -63,6 +63,16 @@ const routes = [
       {
         path: "people-info",
         component: () => import("../views/PeopleInfo.vue"),
+        children: [
+          {
+            path: "people-all",
+            component: () => import("@/components/PeopleInfo/PeopleAll.vue"),
+          },
+          {
+            path: "people-pay",
+            component: () => import("@/components/PeopleInfo/PeoplePay.vue"),
+          },
+        ],
       },
       {
         path: "apply-info",

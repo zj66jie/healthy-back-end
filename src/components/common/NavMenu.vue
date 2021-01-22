@@ -68,13 +68,38 @@
             <i class="el-icon-collection"></i>
             <span slot="title">防疫知识</span>
           </el-menu-item>
-          <el-menu-item
+
+          <el-submenu index="6">
+            <template slot="title">
+              <i class="el-icon-sold-out"></i>
+              <span>人员信息</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item
+                index="/home/people-info/people-all"
+                @click="navTo(`/home/people-info/people-all`)"
+              >
+                <i class="el-icon-s-custom"></i>
+                <span slot="title">全部人员</span>
+              </el-menu-item>
+              <el-menu-item
+                index="/home/people-info/people-pay"
+                @click="navTo(`/home/people-info/people-pay`)"
+              >
+                <i class="el-icon-s-custom"></i>
+                <span slot="title">缴费人员</span>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+
+          <!-- <el-menu-item
             index="/home/people-info"
             @click="navTo(`/home/people-info`)"
           >
             <i class="el-icon-s-custom"></i>
             <span slot="title">人员信息</span>
-          </el-menu-item>
+          </el-menu-item> -->
+
           <el-menu-item
             index="/home/apply-info"
             @click="navTo(`/home/apply-info`)"
@@ -175,6 +200,12 @@ export default {
           break;
         case "/home/cart/cart-order":
           this.$store.commit("SET_contentTitle", ["社区购物", "订单管理"]);
+          break;
+        case "/home/people-info/people-all":
+          this.$store.commit("SET_contentTitle", ["人员信息", "全部人员"]);
+          break;
+        case "/home/people-info/people-pay":
+          this.$store.commit("SET_contentTitle", ["人员信息", "缴费人员"]);
           break;
         default:
           break;

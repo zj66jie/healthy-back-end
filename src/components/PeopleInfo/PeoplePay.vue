@@ -1,12 +1,11 @@
 <template>
-  <div class="people-info">
-    <router-view></router-view>
+  <div class="">
+    pay
   </div>
 </template>
 
 <script>
 export default {
-  name: "vueName",
   data() {
     return {
       msg: "Welcome to your vueName",
@@ -15,6 +14,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "@/assets/styles/global.scss";
 </style>
